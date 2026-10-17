@@ -1,0 +1,112 @@
+## today done
+
+- Initialized the `front-side` Next.js project by cleaning up a boilerplate (renamed package, removed Prisma/DB logic in favor of consuming unified APIs).
+- Created `SYSTEM_DESIGN.md` defining the Multi-Theme Component Architecture.
+- Analyzed a demo school website and incorporated its comprehensive features (Notices, Staff Directories, Galleries, Certificate Verification) into our requirements.
+- Completely rewrote the `docs/` folder (`01_project_overview`, `02_features_spec`, `03_design_system`, `04_api_contracts`, `05_sitemap_and_layout`, `07_design_prompts`, `08_ai_developer_guidelines`) to strictly align with the School Front-Side logic.
+- Configured Global AI Developer Guidelines: Injected master prompts and architectural rules (3-tier architecture, Shadcn, Tailwind CSS v4, Zod, next-intl) into `AGENTS.md` and `CLAUDE.md` so that AI editors automatically enforce project standards.
+- Fully configured Arabic (RTL) capability using Tailwind Logical Properties across all rules and files.
+- **Phase 1 Completed:** 
+  - Integrated `React Query`, `next-themes`, and `next-intl`.
+  - Created `src/services/domain.service.ts` to simulate fetching school branding.
+  - Implemented dynamic CSS variable injection in `layout.tsx` based on the active domain.
+  - Setup Arabic, English, and Bangla locales in `routing.ts` and `proxy.ts`.
+- **Phase 2 Completed (Default Theme Layout):**
+  - Created base layout structures (`Header`, `Footer`) using Shadcn UI.
+  - Implemented responsive, mobile-first navigation and Language/Theme switchers.
+- **Phase 4 Completed (API Hook Integration):**
+  - Written raw Axios calls for School Profile, Notices, Staff, Galleries, etc.
+  - Created robust React Query hooks (`useGetNotices`, etc.) with Zod schemas for data validation.
+- **Phase 3 Completed (Core Pages - Default Theme):**
+  - Built `Section` and `SectionHeading` abstract wrapper components to enforce DRY principles.
+  - Built Homepage with Shadcn Carousel (Hero), custom Tailwind keyframe animations (Marquee), and Bento box quick links.
+  - Built Notices page (with PDF handling), Staff Directory (with category filtering), and Media Gallery (with Lightbox UI).
+  - Built Certificate Verification authentication portal UI with dynamic result states.
+- **Phase 5 Completed (Multi-Theme Proof of Concept):**
+  - Designed an alternative `Modern` theme using a Dashboard/Sidebar architecture instead of a top nav.
+  - Demonstrated dynamic architectural switching by making `HomeThemeRenderer.tsx` read the API's `theme_id` and serve the correct theme while consuming identical React Query hooks.
+- **Phase 6 Completed (Polish & Launch):**
+  - Implemented dynamic SEO Metadata generation intercepting `host` headers.
+  - Built highly premium global 404 (`not-found.tsx`) and 500 (`error.tsx`) error boundaries.
+- **Phase 7 Completed (Modern Theme Dynamic Data & Modular Deconstruction):**
+  - **Backend Public API Extension (`backend/src/modules/front-side/`):**
+    - Implemented public routes, controllers, and Prisma services for:
+      - `/classes` & `/routines` (Dynamic Class schedules and routine slots from `ClassRoutine` / `ClassRoutineSlot`).
+      - `/exams` & `/results` (Public exam list and detailed marksheet lookups from `ExamMark` / `Student`).
+      - `/certificates/verify` (Official student certificate & registry verification with secure hash).
+      - `/admissions/apply` (Online student admission submissions with tracking code `ADM-XXXXXX`).
+      - `/contact` (Public contact inquiries with tracking code `MSG-XXXXXX`).
+      - `/search` (Cross-entity global search across notices, events, downloads, staff, and custom pages).
+  - **Frontend Services & React Query Hooks (`front-side/src/`):**
+    - Added TypeScript interfaces in [school.types.ts](file:///d:/Projects/hamoodtech/school/front-side/src/types/school.types.ts).
+    - Extended [school.service.ts](file:///d:/Projects/hamoodtech/school/front-side/src/services/school.service.ts) and [useSchoolQueries.ts](file:///d:/Projects/hamoodtech/school/front-side/src/hooks/api/school/useSchoolQueries.ts) with full type-safe hooks and queries.
+  - **Critical Bug Fixes:**
+    - Resolved hardcoded `resolveDomain('localhost')` bugs in `/facilities` and `/pages/[slug]` pages by switching to dynamic `headers()` domain resolution.
+  - **Modular Theme Architecture Deconstruction:**
+    - Deconstructed monolithic 1,527-line `ModernSecondaryPages.tsx` into clean, maintainable modular components matching the default theme pattern:
+      - [ModernSchedule.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/academics/ModernSchedule.tsx) (Dynamic class selector + routine schedule slots + print).
+      - [ModernResults.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/results/ModernResults.tsx) (Dynamic exam selector + student ID lookup + detailed marks breakdown).
+      - [ModernCertificate.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/certificate/ModernCertificate.tsx) (Registry lookup + verification seal & printable card).
+      - [ModernAdmissions.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/admissions/ModernAdmissions.tsx) (Dynamic classes + real submission mutation + tracking receipt).
+      - [ModernContact.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/contact/ModernContact.tsx) (Dynamic coordinates + office hours + inquiry submission).
+      - [ModernStaff.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/staff/ModernStaff.tsx) (Department tabs + real-time faculty search).
+      - [ModernNotices.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/notices/ModernNotices.tsx) (Category filters + search + modal view).
+      - [ModernEvents.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/events/ModernEvents.tsx) (Upcoming vs Past filter tabs).
+      - [ModernDownloads.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/downloads/ModernDownloads.tsx) (Document categories + search).
+      - [ModernGallery.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/gallery/ModernGallery.tsx) (Album grid + Lightbox modal).
+      - [ModernFacilities.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/facilities/ModernFacilities.tsx) (Dynamic facility photo & descriptions).
+      - [Navbar.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/modern/layout/Navbar.tsx) (Full API-driven global search modal).
+    - Converted `ModernSecondaryPages.tsx` into a lightweight 25-line re-export hub for 100% backward compatibility.
+- **Phase 8 Completed (Default Theme Dynamic Integration & Bug Fixes):**
+  - **Core Interactive Portals:**
+    - [ClassSchedule.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/academics/ClassSchedule.tsx): Connected to `useGetClasses` & `useGetClassRoutines`. Interactive class selector pills, routine slots with room and teacher info, fallback schedule, and `window.print()` support.
+    - [ResultsPortal.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/results/ResultsPortal.tsx): Connected to `useGetExams` & `SchoolService.getStudentResults`. Dynamic exam selector, student ID lookup, detailed subject marks breakdown (Written, MCQ, Practical, Total, Grade, Point), GPA summary, board exam highlights tab, and printable marksheet layout.
+    - [CertificateVerification.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/certificate/CertificateVerification.tsx): Connected to `SchoolService.verifyCertificate`. Real registry verification, authentic credential certificate card, security verification code, and print action.
+    - [AdmissionsForm.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/admissions/AdmissionsForm.tsx): Dynamic `<select>` dropdown populated from `useGetClasses`, form submission via `useSubmitAdmission` mutation, official confirmation card displaying unique `applicationRef` (`ADM-XXXXXX`), and printable admission slip.
+    - [ContactUs.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/contact/ContactUs.tsx): Connected to `useSubmitContact` mutation, generated ticket reference (`MSG-XXXXXX`), and bound dynamic location coordinates, phone, email, and office hours from `useGetSchoolProfile`.
+  - **Layout & Cross-Cutting Fixes:**
+    - [Header.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/layout/Header.tsx): Implemented live search modal using `useGlobalSearch(school.school_id, debouncedQuery)` with `Ctrl+K` shortcut, categorized search results (Notices, Staff, Events, Downloads, Custom Pages), and dynamic school name.
+    - [Footer.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/layout/Footer.tsx): Bound school name, phone, email, address, and history dynamically to `useSchool` and `useGetSchoolProfile`.
+    - [NoticeList.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/notices/NoticeList.tsx): Replaced broken 404 links to `/notices/[id]` with an interactive Notice Detail modal displaying formatted content, date, category, and PDF download button.
+    - [NoticeMarquee.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/home/NoticeMarquee.tsx): Replaced broken `/notices/[id]` links with clean `/notices` navigation.
+    - [NewsAndEvents.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/home/NewsAndEvents.tsx) & [QuickLinks.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/home/QuickLinks.tsx): Corrected broken `/calendar` links to point to `/events`.
+    - [HeroBanner.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/home/HeroBanner.tsx): Wrapped "Apply Now" with `<Link href="/admissions">` and "Learn More" with `<Link href="/about">`.
+    - [certificate/page.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/app/[locale]/certificate/page.tsx): Fixed double layout wrapper bug where `<DefaultThemeLayout>` was rendered twice.
+  - **Secondary Pages Enhancements:**
+    - [DefaultAcademics.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/academics/DefaultAcademics.tsx): Created full Academics landing component featuring dynamic academic programs/pathways, direct portal navigation cards, pedagogical framework, and admissions CTA. Replaced placeholder `<div>` in `src/app/[locale]/academics/page.tsx`.
+    - [StaffDirectory.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/staff/StaffDirectory.tsx): Dynamically extracted department filter pills, integrated real email and phone actions, and enhanced profile modal.
+    - [EventsCalendar.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/events/EventsCalendar.tsx): Formatted dynamic event times, added interactive event details modal, and Google Calendar add-to-calendar action.
+    - [FacilitiesShowcase.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/facilities/FacilitiesShowcase.tsx): Added verified campus highlights fallback and dark mode compatibility.
+    - [OfficialInformation.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/about/OfficialInformation.tsx): Bound document download buttons directly to document URLs with case-insensitive category filtering.
+    - [RulesSyllabus.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/academics/RulesSyllabus.tsx): Connected Syllabus tab to `useGetDownloads(school_id)` filtering for syllabus documents.
+    - [InfoHub.tsx](file:///d:/Projects/hamoodtech/school/front-side/src/components/themes/default/student-life/InfoHub.tsx): Connected exam schedule tab to `useGetExams(school_id)` and streamlined student verification tab.
+  - **Next.js 15 Async Route Params Compliance:**
+    - Standardized `const { locale } = await params;` across all page routes and `generateMetadata` functions (`events`, `student-life/info-hub`, `academics/schedule`, `contact`, `admissions/info`, `academics/rules`, `academics/attendance`, `about/official-info`, `about/governance`, `about/leadership`).
+  - **Build Verification:**
+    - Turbopack production build (`cmd /c npx next build`) compiled successfully in 23.5s with zero errors across all 22 static and dynamic routes.
+
+- **Phase 9 & 10 Completed (Admin Dashboard & Backend Endpoints Integration):**
+  - **Public Contact Messages Persistence (`backend/` & `frontend/`):**
+    - Added `ContactMessage` model to Prisma schema (`academic.prisma` and `frontside.prisma`), ran `npx prisma generate`.
+    - Persisted inquiries from public front-side `submitContact` and added admin CRUD endpoints (`GET`, `PATCH`, `DELETE` at `/api/v1/front-side/messages`).
+    - Built [Messages Inbox Page](file:///d:/Projects/hamoodtech/school/frontend/src/app/(dashboard)/dashboard/front-side/messages/page.tsx) with search, filter tabs (All, Unread, In Review, Resolved), and full review modal with quick resolve and delete.
+  - **Noticeboard Management UI (`frontend/`):**
+    - Built [Notices Page](file:///d:/Projects/hamoodtech/school/frontend/src/app/(dashboard)/dashboard/front-side/notices/page.tsx) with live search and status filters.
+    - Built [CreateNoticeDialog](file:///d:/Projects/hamoodtech/school/frontend/src/components/front-side/notices/create-notice-dialog.tsx) and [EditNoticeDialog](file:///d:/Projects/hamoodtech/school/frontend/src/components/front-side/notices/edit-notice-dialog.tsx) supporting target audience pills, draft/published status, and attachments.
+    - Updated backend noticeboard controller with automatic active branch fallback.
+  - **Navigation Integration:**
+    - Mounted `frontSideNotices` and `messages` into `frontend/src/config/nav.ts` under `frontSideManagement`.
+  - **Downloads & Syllabus Category Standardizer (`frontend/`):**
+    - Standardized category selection in `create-download-dialog.tsx` and `edit-download-dialog.tsx` with curated presets (`Syllabus`, `Academic Calendar`, `Approval Letter`, `Affiliation Letter`, `Annual Report`, `General Download`, `Routine`, `Prospectus`, `Other`).
+  - **Gallery Multi-Photo Uploader (`backend/` & `frontend/`):**
+    - Added `photos String[]` support to `GalleryAlbum` in backend Prisma schema.
+    - Integrated multi-file `MediaPicker` in `create-gallery-dialog.tsx` and `edit-gallery-dialog.tsx` with thumbnail grid previews, delete triggers, and photo count indicators.
+  - **Verification:**
+    - Zero TypeScript compilation errors across `frontend`, `backend`, and `front-side`.
+
+## Need to do tasks
+- All requested dynamic data requirements, admin pages, backend persistence endpoints, and navigation integrations are fully implemented and verified.
+- Online Admissions application management explicitly deferred per user request.
+
+## problems
+- None. Build and typecheck are clean across all three applications (Exit code 0).

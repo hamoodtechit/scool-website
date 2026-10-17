@@ -1,0 +1,16 @@
+export const schoolKeys = {
+  all: ["school"] as const,
+  profile: (schoolId: string) => [...schoolKeys.all, "profile", schoolId] as const,
+  banners: (schoolId: string) => [...schoolKeys.all, "banners", schoolId] as const,
+  notices: (schoolId: string, limit: number) => [...schoolKeys.all, "notices", schoolId, limit] as const,
+  staff: (schoolId: string, type: string) => [...schoolKeys.all, "staff", schoolId, type] as const,
+  galleries: (schoolId: string) => [...schoolKeys.all, "galleries", schoolId] as const,
+  events: (schoolId: string) => [...schoolKeys.all, "events", schoolId] as const,
+  results: (schoolId: string, studentId?: string, examId?: string) => [...schoolKeys.all, "results", schoolId, studentId, examId] as const,
+  downloads: (schoolId: string) => [...schoolKeys.all, "downloads", schoolId] as const,
+  classes: (schoolId: string) => [...schoolKeys.all, "classes", schoolId] as const,
+  routines: (schoolId: string, classId?: string, sectionId?: string) => [...schoolKeys.all, "routines", schoolId, classId, sectionId] as const,
+  exams: (schoolId: string) => [...schoolKeys.all, "exams", schoolId] as const,
+  certificate: (schoolId: string, refId: string) => [...schoolKeys.all, "certificate", schoolId, refId] as const,
+  search: (schoolId: string, query: string) => [...schoolKeys.all, "search", schoolId, query] as const,
+};
