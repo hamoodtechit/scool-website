@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const envSchema = z.object({
-  DATABASE_URL: z.string().url("Must be a valid Postgres URL"),
+  DATABASE_URL: z.string().url("Must be a valid Postgres URL").optional(),
   NEXT_PUBLIC_API_URL: z.string().url("Must be a valid API URL").optional(),
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
 });

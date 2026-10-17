@@ -1,10 +1,10 @@
 # ==========================================
 # 1. Base Stage: Setup Node & pnpm
 # ==========================================
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+RUN corepack enable && corepack prepare pnpm@11.17.0 --activate
 
 # ==========================================
 # 2. Dependencies Stage
@@ -16,9 +16,9 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json pnpm-lock.yaml* .npmrc* ./
-COPY package.json pnpm-lock.yaml* .npmrc* ./
 
-RUN pnpm i --frozen-lockfile
+ENV NODE_ENV=development
+RUN pnpm i --frozen-lockfile --ignore-scripts
 
 # ==========================================
 # 3. Builder Stage
@@ -28,7 +28,11 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Next.js telemetry is disabled
+# Build-time environment variables for Next.js inlining
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_ADMIN_PORTAL_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_ADMIN_PORTAL_URL=$NEXT_PUBLIC_ADMIN_PORTAL_URL
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build the application

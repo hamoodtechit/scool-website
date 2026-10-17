@@ -524,3 +524,6 @@ The following content sections are intentionally preserved as clean, localized i
     - Set `NEXT_PUBLIC_ADMIN_PORTAL_URL="http://localhost:3000"` in `front-side/.env`.
   - [x] **Verification**:
     - Ran TypeScript typecheck (`tsc --noEmit`) on both `frontend` and `front-side` with **0 errors**.
+
+
+    <!-- https://rk8wc0gw4okoswwkk040sgc4.genify.live -->
