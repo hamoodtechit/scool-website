@@ -40,6 +40,10 @@ import { QueryProvider } from "@/components/providers/query-provider";
 import { Toaster } from "sonner";
 import { SchoolProvider } from "@/components/providers/school-provider";
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function RootLayout({
   children,
   params,

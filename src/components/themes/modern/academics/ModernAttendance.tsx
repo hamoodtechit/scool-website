@@ -1,7 +1,6 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { PageIntro, Glass } from '../common/ModernCommon';
 import { CheckCircle2, Clock, AlertTriangle, FileText, ArrowUpRight } from 'lucide-react';
