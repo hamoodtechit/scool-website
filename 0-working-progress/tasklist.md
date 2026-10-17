@@ -526,4 +526,4 @@ The following content sections are intentionally preserved as clean, localized i
     - Ran TypeScript typecheck (`tsc --noEmit`) on both `frontend` and `front-side` with **0 errors**.
 
 
-    <!-- https://rk8wc0gw4okoswwkk040sgc4.genify.live -->
+

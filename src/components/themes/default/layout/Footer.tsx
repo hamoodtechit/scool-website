@@ -50,7 +50,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/notices" className="hover:text-primary transition-colors">{t("notices")}</Link></li>
               <li><Link href="/results" className="hover:text-primary transition-colors">{t("exam_results")}</Link></li>
-              <li><Link href="/certificate" className="hover:text-primary transition-colors">{t("verify_certificate")}</Link></li>
+              {/* <li><Link href="/certificate" className="hover:text-primary transition-colors">{t("verify_certificate")}</Link></li> */}
               <li><Link href="/downloads" className="hover:text-primary transition-colors">{t("downloads_forms")}</Link></li>
             </ul>
           </div>

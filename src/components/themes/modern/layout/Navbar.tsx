@@ -59,7 +59,7 @@ const moreLinks = [
   ['/gallery', 'gallery', ImageIcon],
   ['/downloads', 'downloads', Download],
   ['/results', 'results', GraduationCap],
-  ['/certificate', 'certificate', ShieldCheck],
+  // ['/certificate', 'certificate', ShieldCheck], // Temporarily hidden
 ] as const;
 
 function ThemeToggle({ className }: { className?: string }) {

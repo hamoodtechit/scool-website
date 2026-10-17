@@ -111,7 +111,8 @@ export function InfoHub() {
                     </Button>
                   </div>
 
-                  <div className="bg-card p-5 rounded-xl border border-border/80 flex flex-col justify-between hover:border-primary/40 transition-colors">
+                  {/* Certificate Verification card - temporarily hidden */}
+                  {/* <div className="bg-card p-5 rounded-xl border border-border/80 flex flex-col justify-between hover:border-primary/40 transition-colors">
                     <div>
                       <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3">
                         <ShieldCheck className="w-5 h-5" />
@@ -127,7 +128,7 @@ export function InfoHub() {
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </CardContent>
             </Card>
