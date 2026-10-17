@@ -3,7 +3,7 @@ import "../globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { generateDynamicThemeCss } from "@/lib/color";
 
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 import { resolveDomain } from "@/services/domain.service";
 import { SchoolService } from "@/services/school.service";
 
@@ -61,6 +61,17 @@ export default async function RootLayout({
   const headersList = await headers();
   const host = headersList.get("host") || "localhost";
   const schoolData = await resolveDomain(host);
+
+  // Check for test/preview theme cookie override
+  try {
+    const cookieStore = await cookies();
+    const previewTheme = cookieStore.get("school_active_theme")?.value;
+    if (previewTheme && (previewTheme === "default" || previewTheme === "modern")) {
+      schoolData.theme_id = previewTheme;
+    }
+  } catch (err) {
+    // cookies read fallback
+  }
 
   return (
     <html

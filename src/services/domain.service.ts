@@ -43,3 +43,23 @@ export const resolveDomain = async (
     };
   }
 };
+
+export const getPublicTheme = async () => {
+  try {
+    const response = await api.get('/public/front-side/theme');
+    return response.data.data;
+  } catch (error) {
+    console.warn("Failed to get public theme:", error);
+    return null;
+  }
+};
+
+export const updatePublicTheme = async (themeId: string) => {
+  try {
+    const response = await api.put('/public/front-side/theme', { themeId });
+    return response.data.data;
+  } catch (error) {
+    console.warn("Failed to update public theme:", error);
+    return null;
+  }
+};

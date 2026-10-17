@@ -16,6 +16,7 @@ import { useGetPages, useGlobalSearch, useGetSchoolProfile } from "@/hooks/api/s
 import { Moon, Sun, Globe, Menu, Search, X, ArrowRight, FileText, Users, Calendar, Download, Layers } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
+import { ThemeSwitcherButton } from "@/components/custom/ThemeSwitcherButton";
 
 export function Header() {
   const t = useTranslations("Navigation");
@@ -157,6 +158,9 @@ export function Header() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+
+          {/* Website Theme Template Switcher (Default vs Modern) */}
+          <ThemeSwitcherButton variant="ghost" size="icon" />
 
           {/* Theme Switcher */}
           <Button
