@@ -21,7 +21,13 @@ interface ThemeSwitcherButtonProps {
   showLabel?: boolean;
 }
 
-export function ThemeSwitcherButton({
+export function ThemeSwitcherButton({}: ThemeSwitcherButtonProps) {
+  // Theme changing icon is hidden on the public front-side.
+  // Theme is controlled solely from the Admin Panel.
+  return null;
+}
+
+export function ThemeSwitcherButtonDisabled({
   className,
   variant = "ghost",
   size = "icon",
@@ -29,6 +35,8 @@ export function ThemeSwitcherButton({
 }: ThemeSwitcherButtonProps) {
   const { theme_id, setThemeId, toggleTheme, isChangingTheme } = useSchool();
   const currentTheme = theme_id || "default";
+
+  return null;
 
   return (
     <DropdownMenu>

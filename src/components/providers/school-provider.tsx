@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useTransition } from "react";
-import { DomainResolution, updatePublicTheme } from "@/services/domain.service";
+import { DomainResolution } from "@/services/domain.service";
 import { toast } from "sonner";
 
 export interface SchoolContextType extends DomainResolution {
@@ -57,8 +57,8 @@ export function SchoolProvider({
       console.warn("Could not write to localStorage/cookies:", e);
     }
 
-    // Call public backend endpoint asynchronously to sync database
-    updatePublicTheme(newTheme).catch(() => {});
+    // Public backend sync is disabled — theme is controlled from the Admin Panel.
+    // updatePublicTheme(newTheme).catch(() => {});
 
     toast.success(`Theme switched to: ${newTheme === "modern" ? "Modern Theme" : "Default Theme"}`, {
       description: "Frontend theme updated instantly.",

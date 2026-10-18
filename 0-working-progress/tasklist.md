@@ -522,8 +522,49 @@ The following content sections are intentionally preserved as clean, localized i
   - [x] **Environment Configuration**:
     - Set `NEXT_PUBLIC_FRONTSIDE_URL="http://localhost:3001"` in `frontend/.env`.
     - Set `NEXT_PUBLIC_ADMIN_PORTAL_URL="http://localhost:3000"` in `front-side/.env`.
-  - [x] **Verification**:
-    - Ran TypeScript typecheck (`tsc --noEmit`) on both `frontend` and `front-side` with **0 errors**.
+- [x] **11.15. Front-Side Live Theme Switcher for Interactive Testing (`front-side/`)**
+  - [x] **Component Implementation (`src/components/custom/ThemeSwitcherButton.tsx`)**:
+    - Created an interactive theme switcher button placed beside the language switcher icon button in the header.
+    - Added dropdown menu allowing instant toggle between "Default Theme (Classical)" and "Modern Theme (Vibrant)" with active check indicator and template preview badge.
+    - Implemented cookie-based synchronization (`school_active_theme`) on both client and Next.js SSR (`layout.tsx`), persisting the chosen theme across page navigations and refreshes without requiring backend database modification.
+  - [x] **Header & Navbar Integration**:
+    - **Default Theme (`Header.tsx`)**: Mounted `<ThemeSwitcherButton variant="ghost" size="icon" />` in the top right controls bar next to the language switcher.
+    - **Modern Theme (`Navbar.tsx`)**: Mounted `<ThemeSwitcherButton />` in desktop controls and inside the mobile slide-out drawer.
 
+- [x] **11.16. Temporary Certificate Page & Navigation Hiding (`front-side/`)**
+  - [x] **Clean Non-Destructive Hiding**:
+    - Preserved all underlying certificate verification logic and backend API integration without deleting any code.
+  - [x] **Navigation & Links Deactivation**:
+    - **Modern Theme Navbar (`Navbar.tsx`)**: Commented out `/certificate` link from `moreLinks`.
+    - **Default Theme Footer (`Footer.tsx`)**: Commented out `/certificate` link under "Portals & Resources".
+    - **Default Theme InfoHub (`InfoHub.tsx`)**: Commented out certificate verification card under Student Verification tab.
+  - [x] **Route Protection (`src/app/[locale]/certificate/page.tsx`)**:
+    - Injected Next.js `notFound()` handler so any direct URL access to `/certificate` gracefully serves the standard 404 page.
+
+- [x] **11.17. Global Locale Routing & 404 URL Resolution Across Both Themes (`front-side/`)**
+  - [x] **Root Cause Diagnosis**:
+    - Resolved 404 "Not Found" error occurring when navigating via links such as "Explore Campus" (`/about` vs `/en/about`).
+    - Identified that `next-intl` defaulted to `localePrefix: 'as-needed'`, which stripped `/en` on the default locale and emitted bare `/about` URLs.
+    - Since Next.js folder routing uses `src/app/[locale]/about/page.tsx`, bare URLs matched `[locale]` as `"about"`, failing locale validation in `layout.tsx` (`routing.locales.includes(locale) === false`) and triggering `notFound()`.
+    - Next.js 16 proxy matcher in `src/proxy.ts` was restricted to `/(bn|en|ar)/:path*`, allowing bare routes to bypass the middleware without redirection.
+    - Several Modern theme components were importing directly from `next/link` instead of `@/i18n/routing`.
+  - [x] **Enforced Locale Prefixing (`src/i18n/routing.ts`)**:
+    - Added `localePrefix: 'always'` to `defineRouting`. All links rendered by `@/i18n/routing` now consistently output localized paths (`/en/...`, `/bn/...`, `/ar/...`).
+  - [x] **Next.js 16 Network Proxy / Middleware Upgrade (`src/proxy.ts`)**:
+    - Updated matcher pattern to `['/((?!api|_next|_vercel|.*\\..*).*)']`. Any direct or external access to bare URLs (e.g. `/about`, `/academics`, `/contact`, `/notices`) is automatically intercepted and 307/308 redirected to `/en/about`, etc.
+    - Exported both `default` and named `proxy` handler for full Next.js 16 runtime compatibility.
+  - [x] **Locale Static Parameters Registration (`src/app/[locale]/layout.tsx`)**:
+    - Added `generateStaticParams()` returning `[{ locale: 'en' }, { locale: 'bn' }, { locale: 'ar' }]` to pre-register all supported locales with Next.js page generation.
+  - [x] **Modern Theme Link Imports Modernization**:
+    - Replaced all unlocalized `import Link from 'next/link'` with `import { Link } from '@/i18n/routing'` across:
+      - `ModernHome.tsx`
+      - `ModernAbout.tsx`
+      - `ModernAcademics.tsx`
+      - `ModernAttendance.tsx`
+      - `ModernAdmissions.tsx`
+      - `ModernAdmissionInfo.tsx`
+  - [x] **Build & Route Verification**:
+    - TypeScript validation (`cmd /c npx tsc --noEmit`): Completed with **0 errors**.
+    - Next.js production build (`cmd /c npm run build`): Successfully compiled and generated all **66 static and dynamic routes** across all 3 locales (`en`, `bn`, `ar`) with `ƒ Proxy (Middleware)` active.
 
 

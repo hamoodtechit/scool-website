@@ -159,8 +159,8 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Website Theme Template Switcher (Default vs Modern) */}
-          <ThemeSwitcherButton variant="ghost" size="icon" />
+          {/* Website Theme Template Switcher - Controlled via Admin Panel */}
+          {/* <ThemeSwitcherButton variant="ghost" size="icon" /> */}
 
           {/* Theme Switcher */}
           <Button

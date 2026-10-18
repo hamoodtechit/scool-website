@@ -349,11 +349,11 @@ export function Navbar() {
             {/* Language Switcher - visible on sm+ screens, mobile drawer has dedicated switcher */}
             <LanguageSwitcher className="hidden sm:inline-flex size-9 sm:size-10" />
 
-            {/* Website Theme Template Switcher (Default vs Modern) */}
-            <ThemeSwitcherButton
+            {/* Website Theme Template Switcher - Managed via Admin Panel */}
+            {/* <ThemeSwitcherButton
               variant="outline"
               className="border-border/60 bg-background/50 hover:border-primary/40 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md shrink-0 size-9 sm:size-10"
-            />
+            /> */}
 
             {/* Theme Toggle - visible on sm+ screens, mobile drawer has dedicated toggle */}
             <ThemeToggle className="hidden sm:inline-flex size-9 sm:size-10" />
@@ -458,10 +458,6 @@ export function Navbar() {
                       </Link>
                     </div>
                     <div className="flex items-center gap-2">
-                      <ThemeSwitcherButton
-                        variant="outline"
-                        className="size-8 rounded-xl border-border/60 bg-background/50"
-                      />
                       <ThemeToggle />
                     </div>
                   </div>

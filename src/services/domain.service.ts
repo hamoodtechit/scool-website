@@ -54,12 +54,14 @@ export const getPublicTheme = async () => {
   }
 };
 
-export const updatePublicTheme = async (themeId: string) => {
-  try {
-    const response = await api.put('/public/front-side/theme', { themeId });
-    return response.data.data;
-  } catch (error) {
-    console.warn("Failed to update public theme:", error);
-    return null;
-  }
-};
+// Public theme changing is disabled — theme is controlled from the Admin Panel.
+// export const updatePublicTheme = async (themeId: string) => {
+//   try {
+//     const response = await api.put('/public/front-side/theme', { themeId });
+//     return response.data.data;
+//   } catch (error) {
+//     console.warn("Failed to update public theme:", error);
+//     return null;
+//   }
+// };
+
